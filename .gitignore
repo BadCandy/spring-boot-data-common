@@ -1,5 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Maven template
+**/mvnw*
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -95,4 +96,6 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
-
+*.iml
+.idea
+.mvn
