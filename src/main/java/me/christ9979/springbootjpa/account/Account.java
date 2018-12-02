@@ -2,6 +2,8 @@ package me.christ9979.springbootjpa.account;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Account {
@@ -48,6 +50,54 @@ public class Account {
             @AttributeOverride(name = "street", column = @Column(name = "home_street"))
     })
     private Address address;
+
+    /*
+        일대다 관계를 정의하는 어노테이션.
+        현재 클래스가 owned 클래스가 된다. 꼭 mappedBy로 owning 클래스의 매핑 필드를 명시해야한다.
+     */
+    @OneToMany(mappedBy = "owner")
+    private Set<Study> studies = new HashSet<>();
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public String getYes() {
+        return yes;
+    }
+
+    public void setYes(String yes) {
+        this.yes = yes;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<Study> getStudies() {
+        return studies;
+    }
+
+    public void setStudies(Set<Study> studies) {
+        this.studies = studies;
+    }
+
     public Long getId() {
         return id;
     }
@@ -70,5 +120,27 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /*
+        다대다 관계를 표현하기 위해
+        관례적으로 작성하는 메소드
+     */
+    public void addStudy(Study study) {
+
+        study.setOwner(this);
+        // 사실상 아래의 코드는 빠져도 상관없지만
+        // 객체지향적으로 다대다 관계를 표현하기 위해 작성하자.
+        this.getStudies().add(study);
+    }
+
+    /*
+        다대다 관계를 삭제하기 위해
+        관례적으로 작성하는 메소드
+     */
+    public void removeStudy(Study study) {
+
+        study.setOwner(null);
+        this.getStudies().remove(study);
     }
 }
