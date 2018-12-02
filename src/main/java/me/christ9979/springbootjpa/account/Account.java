@@ -39,6 +39,15 @@ public class Account {
     @Transient
     private String no;
 
+    /*
+        Composite Value 타입을 DB 스키마에 매핑할수 있도록함.
+        @AttributeOverrides를 사용할경우 컬럼이름 변경가능
+     */
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column = @Column(name = "home_street"))
+    })
+    private Address address;
     public Long getId() {
         return id;
     }
