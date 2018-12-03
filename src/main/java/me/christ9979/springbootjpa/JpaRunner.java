@@ -63,7 +63,7 @@ public class JpaRunner implements ApplicationRunner {
          */
         post.setTitle("제목입니다.");
 
-        session.delete(post);
+//        session.delete(post);
     }
 
     private void doAccount() {

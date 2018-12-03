@@ -1,9 +1,6 @@
 package me.christ9979.springbootjpa.post;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Comment {
@@ -14,7 +11,12 @@ public class Comment {
 
     private String comment;
 
-    @ManyToOne
+    /*
+        fetch :
+            ManyToOne는 기본적으로 FetchType.EAGER가 디폴트 값이다.
+            왜냐하면, 한개의 값은 미리 읽어와도 성능에 큰영향을 미치지 않는다.
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
     private Post post;
 
     public void setPost(Post post) {
