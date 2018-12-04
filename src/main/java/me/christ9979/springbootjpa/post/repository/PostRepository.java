@@ -1,6 +1,8 @@
 package me.christ9979.springbootjpa.post.repository;
 
 import me.christ9979.springbootjpa.post.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /*
@@ -12,4 +14,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
     이 부분에서 JpaRepository 인터페이스를 상속받은 인터페이스들을 자동으로 구현하여 빈으로 등록해준다.
  */
 public interface PostRepository extends JpaRepository<Post, Long> {
+
+    /*
+        식별자가 아닌 title을 이용하여 page를 얻어오는 커스텀 쿼리 호출 메소드
+     */
+    Page<Post> findByTitleContains(String title, Pageable pageable);
+
+    Long countByTitleContains(String title);
 }
