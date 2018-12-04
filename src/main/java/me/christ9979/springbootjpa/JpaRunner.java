@@ -30,14 +30,25 @@ public class JpaRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
 //        doAccount();
-        doPost();
-
+//        doPost();
+        doPostByJpa();
     }
 
     private void doPostByJpa() {
 
+        Post post = new Post();
+        post.setTitle("제목입니다.");
+
+        Comment comment1 = new Comment();
+        comment1.setComment("댓글1 입니다.");
+        post.addComment(comment1);
+
+        Comment comment2 = new Comment();
+        comment2.setComment("댓글2 입니다.");
+        post.addComment(comment2);
+
         // jpa 사용
-        postRepository.findAll();
+        postRepository.save(post);
     }
 
     private void doPost() {
