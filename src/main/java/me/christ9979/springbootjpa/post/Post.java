@@ -55,4 +55,15 @@ public class Post {
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
+
+    /*
+        toString 사용시 lazy loading이 되는 값을 사용하면,
+        lazy loading이 안될수도 있으니 유의해서 사용하자.
+     */
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                '}';
+    }
 }

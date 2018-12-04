@@ -5,7 +5,9 @@ import me.christ9979.springbootjpa.account.Address;
 import me.christ9979.springbootjpa.account.Study;
 import me.christ9979.springbootjpa.post.Comment;
 import me.christ9979.springbootjpa.post.Post;
+import me.christ9979.springbootjpa.post.repository.PostRepository;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -21,12 +23,21 @@ public class JpaRunner implements ApplicationRunner {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private PostRepository postRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
 //        doAccount();
         doPost();
 
+    }
+
+    private void doPostByJpa() {
+
+        // jpa 사용
+        postRepository.findAll();
     }
 
     private void doPost() {
