@@ -19,6 +19,16 @@ public class Comment {
     @ManyToOne(fetch = FetchType.EAGER)
     private Post post;
 
+    private Integer likeCount;
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
+
     public void setPost(Post post) {
         this.post = post;
     }

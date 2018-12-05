@@ -47,4 +47,9 @@ public class CommentRepositoryTest {
         List<Comment> comments = commentRepository.findAll();
         assertThat(comments).isEmpty();
     }
+
+    @Test
+    public void autoCreatedQueryTest() {
+
+    }
 }
