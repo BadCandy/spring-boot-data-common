@@ -1,10 +1,12 @@
-package me.christ9979.springbootjpa.repository;
+package me.christ9979.springbootjpa.common.repository;
 
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
+import org.springframework.lang.NonNull;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 /*
     공통 쿼리 메소드를 중복되게 작성하기 번거롭다면,
@@ -14,9 +16,16 @@ import java.util.List;
 @NoRepositoryBean
 public interface MyRepository<T, ID extends Serializable> extends Repository<T, ID> {
 
-    <E extends T> E save(E entity);
+    /*
+        스프링 프레임워크 5.0부터 지원하는 Null 체크 어노테이션 지원.
+        @NonNullApi : 패키지에 사용
+        @NonNull, @Nullable
+     */
+    <E extends T> E save(@NonNull E entity);
 
     List<T> findAll();
 
     long count();
+
+    <E extends T> Optional<E> findById(ID id);
 }
