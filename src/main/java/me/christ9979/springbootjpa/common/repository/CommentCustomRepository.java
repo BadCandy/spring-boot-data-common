@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface CommentCustomRepository extends MyRepository<Comment, Long> {
 
@@ -22,4 +23,8 @@ public interface CommentCustomRepository extends MyRepository<Comment, Long> {
         리턴타입 (접두어)(도입부)By(프로퍼티 표현식)(조건식)(AND|OR)(프로퍼티 표현식)(조건식)(정렬 조건) 파라미터
      */
     Page<Comment> findByLikeCountGreaterThanAndPost(int likeCount, Post post, Pageable pageable);
+
+    Page<Comment> findByCommentContainsIgnoreCase(String comment, Pageable pageable);
+
+    Stream<Comment> findByCommentContainsIgnoreCase(String comment);
 }
