@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.QueryLookupStrategy;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /*
 	기본적으로 Spring Data Common에서 쿼리를 만드는 방식은 세가지가 있다.
@@ -12,6 +13,10 @@ import org.springframework.data.repository.query.QueryLookupStrategy;
 	3. QueryLookupStrategy.Key.USE_DECLARED_QUERY : 커스텀한 선언된 쿼리를 이용한다.
  */
 @SpringBootApplication
+/*
+	@Async를 사용하기 위한 어노테이션
+ */
+@EnableAsync
 //@EnableJpaRepositories(queryLookupStrategy = QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND)
 public class SpringbootjpaApplication {
 

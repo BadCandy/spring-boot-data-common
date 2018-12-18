@@ -27,4 +27,5 @@ public interface CommentCustomRepository extends MyRepository<Comment, Long> {
     Page<Comment> findByCommentContainsIgnoreCase(String comment, Pageable pageable);
 
     Stream<Comment> findByCommentContainsIgnoreCase(String comment);
+
 }
