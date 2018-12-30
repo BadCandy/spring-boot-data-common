@@ -1,6 +1,8 @@
 package me.christ9979.springbootjpa.post;
 
 import javax.persistence.*;
+import java.sql.DatabaseMetaData;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +14,20 @@ public class Post {
     private Long id;
 
     private String title;
+
+    /*
+        본문이 255자가 넘을경우 @Lob 어노테이션을 사용한다.
+     */
+    @Lob
+    private String content;
+
+    /*
+        TemporalType.TIME : Only 시간
+        TemporalType.DATE : Only 날짜
+        TemporalType.TIMESTAMP : 날짜 + 시간
+    */
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
     /*
         cascade :

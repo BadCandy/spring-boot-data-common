@@ -75,4 +75,20 @@ public class PostRepositoryTest {
         Long springCount = postRepository.countByTitleContains("spring");
         assertThat(springCount).isEqualTo(1);
     }
+
+    @Test
+    public void crud() {
+        Post post = new Post();
+        post.setTitle("hibernate");
+        postRepository.save(post);
+        postRepository.findMyPost();
+
+        /*
+            Spring Jpa delete를 사용하지 않고,
+            커스텀한 delete를 사용한다.
+         */
+        postRepository.delete(post);
+        postRepository.flush();
+
+    }
 }
