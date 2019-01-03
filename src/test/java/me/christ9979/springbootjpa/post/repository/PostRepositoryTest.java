@@ -91,4 +91,21 @@ public class PostRepositoryTest {
         postRepository.flush();
 
     }
+
+    @Test
+    public void commonCustomRepositoryTest() {
+
+        Post post = new Post();
+        post.setTitle("hibernate");
+
+        // 공통 레파지토리에 있는 contains 사용
+        // post 객체는 transient 상태
+        assertThat(postRepository.contains(post)).isFalse();
+
+        postRepository.save(post);
+        assertThat(postRepository.contains(post)).isTrue();
+
+        postRepository.delete(post);
+        postRepository.flush();
+    }
 }

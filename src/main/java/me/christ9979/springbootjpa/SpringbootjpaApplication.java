@@ -1,5 +1,6 @@
 package me.christ9979.springbootjpa;
 
+import me.christ9979.springbootjpa.common.repository.BaseCommonRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -23,8 +24,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 	Custom Repository를 만들때 Postfix를 Impl로 설정하고 싶지 않다면
 	repositoryImplementationPostfix를 사용한다.
+
+	모든 레파지토리에서 공통으로 사용하는 레파지토리를 정의하고 싶다면, repositoryBaseClass에 공통 레파지토리 구현체를 정의한다.
+	그리고 공통 레파지토리 인터페이스를 상속받아 다른 레파지토리에서 사용한다.
  */
-//@EnableJpaRepositories(queryLookupStrategy = QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND, repositoryImplementationPostfix = "default")
+@EnableJpaRepositories(
+//		queryLookupStrategy = QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND, repositoryImplementationPostfix = "default",
+		repositoryBaseClass = BaseCommonRepository.class)
 public class SpringbootjpaApplication {
 
 	public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package me.christ9979.springbootjpa.post.repository;
 
+import me.christ9979.springbootjpa.common.repository.CommonRepository;
 import me.christ9979.springbootjpa.post.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /*
     PostCustomRepository를 상속함으로써 우리가 커스텀으로 정의한 레파지토리를 Jpa와 같이 사용할수 있다.
  */
-public interface PostRepository extends JpaRepository<Post, Long>, PostCustomRepository<Post> {
+public interface PostRepository extends JpaRepository<Post, Long>, PostCustomRepository<Post>, CommonRepository<Post, Long> {
 
     /*
         식별자가 아닌 title을 이용하여 page를 얻어오는 커스텀 쿼리 호출 메소드
