@@ -94,6 +94,11 @@ public class Post extends AbstractAggregateRoot<Post> {
                 '}';
     }
 
+    /*
+        이벤트를 등록한다.
+        이 이벤트는 해당 리스너가 작성되어 있어야 처리가된다.
+        직접 작성한 PostEventListener 클래스가 받아서 처리한다.
+     */
     public Post registerPost() {
         this.registerEvent(new PostPublishedEvent(this));
         return this;
