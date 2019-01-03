@@ -1,13 +1,24 @@
 package me.christ9979.springbootjpa.post;
 
+import me.christ9979.springbootjpa.post.event.PostPublishedEvent;
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import javax.persistence.*;
 import java.sql.DatabaseMetaData;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/*
+    스프링 Entity에 도메인 이벤트를 발생시키고 싶으면
+    AbstractAggregateRoot를 상속받아 사용하면 된다.
+    원래는 @DomainEvent와 @AfterDomainEventPublication으로 구현해야한다.
+    이미 도메인이 상속받은 클래스라면 위의 어노테이션을 사용하는것을 고려하자.
+
+    현재는 save() 할 때만 발생한다.
+ */
 @Entity
-public class Post {
+public class Post extends AbstractAggregateRoot<Post> {
 
     @Id
     @GeneratedValue
@@ -81,5 +92,10 @@ public class Post {
         return "Post{" +
                 "id=" + id +
                 '}';
+    }
+
+    public Post registerPost() {
+        this.registerEvent(new PostPublishedEvent(this));
+        return this;
     }
 }

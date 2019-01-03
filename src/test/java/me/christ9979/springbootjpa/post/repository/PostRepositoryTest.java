@@ -1,10 +1,12 @@
 package me.christ9979.springbootjpa.post.repository;
 
+import me.christ9979.springbootjpa.TestConfiguration;
 import me.christ9979.springbootjpa.post.Post;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
@@ -19,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     - 스프링 Jpa에 관련된 빈만 주입해준다. (SliceTest)
  */
 @RunWith(SpringRunner.class)
+@Import(TestConfiguration.class)
 @DataJpaTest
 public class PostRepositoryTest {
 
@@ -103,6 +106,23 @@ public class PostRepositoryTest {
         assertThat(postRepository.contains(post)).isFalse();
 
         postRepository.save(post);
+        assertThat(postRepository.contains(post)).isTrue();
+
+        postRepository.delete(post);
+        postRepository.flush();
+    }
+
+    @Test
+    public void postEventListenerTest() {
+
+        Post post = new Post();
+        post.setTitle("hibernate");
+
+        // 공통 레파지토리에 있는 contains 사용
+        // post 객체는 transient 상태
+        assertThat(postRepository.contains(post)).isFalse();
+
+        postRepository.save(post.registerPost());
         assertThat(postRepository.contains(post)).isTrue();
 
         postRepository.delete(post);
