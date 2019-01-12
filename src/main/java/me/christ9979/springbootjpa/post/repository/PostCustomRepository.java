@@ -26,5 +26,5 @@ public interface PostCustomRepository<T> {
 
         여기서는 이러한 성능 손실이 마음에 들지 않는다고하여 예시로 delete를 재정의 해보자.
      */
-    void delete(T entity);
+//    void delete(T entity);
 }

@@ -122,10 +122,12 @@ public class PostRepositoryTest {
         // post 객체는 transient 상태
         assertThat(postRepository.contains(post)).isFalse();
 
+        // 이벤트를 발행한다.
         postRepository.save(post.registerPost());
         assertThat(postRepository.contains(post)).isTrue();
 
-        postRepository.delete(post);
+        // 이벤트를 발행해도 먹히지 않는다.
+        postRepository.delete(post.registerPost());
         postRepository.flush();
     }
 }

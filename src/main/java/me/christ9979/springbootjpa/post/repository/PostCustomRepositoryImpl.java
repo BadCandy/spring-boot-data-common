@@ -26,9 +26,9 @@ public class PostCustomRepositoryImpl implements PostCustomRepository<Post> {
                 .getResultList();
     }
 
-    @Override
-    public void delete(Post entity) {
-        System.out.println("custom delete");
-        entityManager.remove(entity);
-    }
+//    @Override
+//    public void delete(Post entity) {
+//        System.out.println("custom delete");
+//        entityManager.remove(entity);
+//    }
 }
